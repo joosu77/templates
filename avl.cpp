@@ -107,9 +107,9 @@ bool find(Node* n, ll val){
     } else if (n->val==val) {
         return 1;
     } else if (n->val < val){
-        return erase(n->r, val);
+        return find(n->r, val);
     } else {
-        return erase(n->l, val);
+        return find(n->l, val);
     }
     
 }
@@ -120,25 +120,35 @@ int maxdepth(Node* n){
     }
     return max(maxdepth(n->l), maxdepth(n->r))+1;
 }
-int print(Node* n, int d){
+void print(Node* n, int d){
     if (!n || !d){
-        return 0;
+        return;
     }
-    cout <<n->val<< " at layer " << d <<'\n';
-    return max(print(n->l,d-1), print(n->r,d-1))+1;
+    print(n->l, d-1);
+    cout <<n->val<<' ';
+    print(n->r, d-1);
 }
 
 int main(){
     Node* root = new Node;
-    for (int i=0;i<10000000;i++){
-        root = insert(root, i);
+    
+    int n,m;
+    cin>>n>>m;
+    for (int i=0;i<n;i++){
+        int a;
+        cin>>a;
+        if (i==0){
+            root->val = a;
+        } else {
+            root = insert(root,a);
+        }
     }
-    cout <<"depth after inserting 100 vals: "<< maxdepth(root) << '\n';
-    for (int i=10;i<90;i++){
-        root = erase(root, i);
+    
+    for (int i=0;i<m;i++){
+        int a;
+        cin>>a;
+        cout << find(root, a)<<' ';
     }
-    cout <<"depth after erasing 80 of them: "<< maxdepth(root) << '\n';
-    cout << "50 shouldnt exist: " << find(root,50) << '\n';
-    cout << "5 should exist: " << find(root,5) << '\n';
+    cout << '\n';
     destroy(root);
 }

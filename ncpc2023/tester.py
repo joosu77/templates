@@ -4,6 +4,9 @@ from subprocess import Popen, PIPE, STDOUT
 import glob, sys, os
 
 
+def parse(inp):
+    return [i for i in [i.strip() for i in inp.split("\n")] if i]
+
 def main():
     name = sys.argv[1]
     if name[-4:] == ".cpp":
@@ -31,12 +34,15 @@ def main():
         p = Popen(commands, stdout=PIPE, stdin=PIPE, stderr=PIPE)
         stdout_data = p.communicate(input=dat.encode())[0]
         if expected is not None:
-            if expected == stdout_data.decode():
+            exp = parse(expected)
+            got = parse(stdout_data.decode())
+            #if expected == stdout_data.decode():
+            if exp == got:
                 print("SUCCESS")
             else:
                 print(f"FAILURE")
-                print(f"Expected: {[expected]}")
-                print(f"Got: {[stdout_data.decode()]}")
+                print(f"Expected: {[exp]}")
+                print(f"Got: {[got]}")
         else:
             print(f"Got output: {stdout_data}")
         print()

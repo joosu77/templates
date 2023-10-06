@@ -35,7 +35,7 @@ pair<Node*, pair<ll,bool> > query(Node* n, int l, int r){
     n = propagate(n);
     if (n->minid>r || n->maxid<l){
         return pp(n, 0, 0);
-    } else if (n->minid <= l || n->maxid >= r){
+    } else if (n->minid <= l && n->maxid >= r){
         return pp(n, n->val, 1);
     } else {
         auto lp = query(n->l, l, r);
@@ -48,7 +48,7 @@ Node* set(Node* n, ll val, int l, int r){
     n = propagate(n);
     if (n->minid>r || n->maxid<l){
         return n;
-    } else if (n->minid <= l || n->maxid >= r){
+    } else if (n->minid <= l && n->maxid >= r){
         n->to_set = 1;
         n->set_val = val;
         n->add_val = 0;
@@ -63,7 +63,7 @@ Node* add(Node* n, ll val, int l, int r){
     n = propagate(n);
     if (n->minid>r || n->maxid<l){
         return n;
-    } else if (n->minid <= l || n->maxid >= r){
+    } else if (n->minid <= l && n->maxid >= r){
         n->add_val = val;
     } else {
         n->l = add(n->l, val, l, r);
