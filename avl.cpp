@@ -92,6 +92,15 @@ Node* erase(Node* n, ll val){
     return n;
 }
 
+void destroy(Node* n){
+    if (!n){
+        return;
+    }
+    destroy(n->l);
+    destroy(n->r);
+    delete n;
+}
+
 bool find(Node* n, ll val){
     if (!n){
         return 0;
@@ -121,7 +130,7 @@ int print(Node* n, int d){
 
 int main(){
     Node* root = new Node;
-    for (int i=0;i<100;i++){
+    for (int i=0;i<10000000;i++){
         root = insert(root, i);
     }
     cout <<"depth after inserting 100 vals: "<< maxdepth(root) << '\n';
@@ -131,4 +140,5 @@ int main(){
     cout <<"depth after erasing 80 of them: "<< maxdepth(root) << '\n';
     cout << "50 shouldnt exist: " << find(root,50) << '\n';
     cout << "5 should exist: " << find(root,5) << '\n';
+    destroy(root);
 }
