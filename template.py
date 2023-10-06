@@ -160,12 +160,32 @@ class DisjointSet:
         self.size[root2] += self.size[root1]
 
 
-def is_prime(n):
-    if n <= 2:
-        return True
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            return False
+global a_values
+a_values = [2, 7, 61]
+
+
+def miller_test(n):
+    if n < 2 or n % 2 == 0:
+        return False
+    d = n - 1
+    s = 0
+    while d % 2 == 0:
+        s += 1
+        d = d // 2
+    for a in a_values:
+        x = pow(a, d, n)
+        if x == 1 or x == n - 1:
+            continue
+
+        should_continue = False
+        for _ in range(s - 1):
+            x = x * x % n
+            if x == n - 1:
+                should_continue = True
+                break
+        if should_continue:
+            continue
+        return False
     return True
 
 
