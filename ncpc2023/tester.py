@@ -9,6 +9,12 @@ def main():
     if name[-4:] == ".cpp":
         os.system(f"g++ -o {name[:-4]} -g {name}")
         name = name[:-4]
+        commands = [name]
+    elif name[-3:] == ".py":
+        commands = ["python", name]
+    else:
+        print("Panicing")
+        exit()
     print(f"Testing {name}")
     for filename in glob.glob("input/*"):
         print(f"Test: {filename}")
@@ -22,7 +28,7 @@ def main():
             file.close()
         else:
             expected = None
-        p = Popen([name], stdout=PIPE, stdin=PIPE, stderr=PIPE)
+        p = Popen(commands, stdout=PIPE, stdin=PIPE, stderr=PIPE)
         stdout_data = p.communicate(input=dat.encode())[0]
         if expected is not None:
             if expected == stdout_data.decode():
