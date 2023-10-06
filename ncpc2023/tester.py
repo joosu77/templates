@@ -6,6 +6,9 @@ import glob, sys, os
 
 def main():
     name = sys.argv[1]
+    if name[-4:] == ".cpp":
+        os.system(f"g++ -o {name[:-4]} -g {name}")
+        name = name[:-4]
     print(f"Testing {name}")
     for filename in glob.glob("input/*"):
         print(f"Test: {filename}")
