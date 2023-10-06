@@ -158,8 +158,6 @@ class DisjointSet:
         root2 = self.find(item2)
         self.parent[root1] = root2
         self.size[root2] += self.size[root1]
-        del self.size[root1]
-        print(self.size)
 
 
 def is_prime(n):
