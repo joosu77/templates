@@ -1,0 +1,16 @@
+11 4
+L 2 Hindi
+L 7 Chinese
+I 11 и 3 13
+I 13 á 5 19
+L 3 Ukranian
+L 19 English
+I 17 न 2 31
+L 5 Portugese
+I 31 你 23 11
+I 23 こ 29 7
+L 29 Japanese
+नमस्ते
+你好
+привіт
+olá

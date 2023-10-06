@@ -1,0 +1,12 @@
+11
+alpha beta 3000 0
+alpha gamma 2000 0
+gamma epsilon 7000 0
+beta delta 5000 1
+delta epsilon 8000 1
+beta epsilon 5000 1
+epsilon zeta 9000 1
+zeta delta 4000 1
+zeta eta 5000 0
+zeta theta 8000 1
+eta theta 6500 1
